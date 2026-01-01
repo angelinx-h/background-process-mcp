@@ -22,16 +22,17 @@ This configuration works for most MCP clients:
 {
   "mcpServers": {
     "backgroundProcess": {
-      "command": "npx",
+      "command": "pnpm",
       "args": [
-        "@waylaidwanderer/background-process-mcp@latest"
+        "dlx",
+        "github:angelinx-h/background-process-mcp#v1.0.0"
       ]
     }
   }
 }
 ```
 
-To connect to a standalone server, add the `--port` argument to the `args` array (e.g., `...mcp@latest", "--port", "31337"]`). To force the MCP server to spawn the core service on a specific port (so the TUI can connect), use `--listen-port` instead (e.g., `...mcp@latest", "--listen-port", "31337"]`).
+To connect to a standalone server, add the `--port` argument to the `args` array (e.g., `..."#v1.0.0", "--port", "31337"]`). To force the MCP server to spawn the core service on a specific port (so the TUI can connect), use `--listen-port` instead (e.g., `..."#v1.0.0", "--listen-port", "31337"]`).
 
 **With fixed port (optional)**
 
@@ -41,9 +42,10 @@ To use a fixed port 31337, add the `--listen-port` argument:
 {
   "mcpServers": {
     "backgroundProcess": {
-      "command": "npx",
+      "command": "pnpm",
       "args": [
-        "@waylaidwanderer/background-process-mcp@latest",
+        "dlx",
+        "github:angelinx-h/background-process-mcp#v1.0.0",
         "--listen-port",
         "31337"
       ]
@@ -58,13 +60,13 @@ To use a fixed port 31337, add the `--listen-port` argument:
 Use the Claude Code CLI to add the Background Process MCP server:
 
 ```bash
-claude mcp add backgroundProcess npx @waylaidwanderer/background-process-mcp@latest
+claude mcp add backgroundProcess pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0
 ```
 
 Or with a fixed port:
 
 ```bash
-claude mcp add backgroundProcess npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337
+claude mcp add backgroundProcess pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0 --listen-port 31337
 ```
 </details>
 
@@ -82,16 +84,16 @@ Create or edit the configuration file `~/.codex/config.toml` and add:
 
 ```toml
 [mcp_servers.backgroundProcess]
-command = "npx"
-args = ["@waylaidwanderer/background-process-mcp@latest"]
+command = "pnpm"
+args = ["dlx", "github:angelinx-h/background-process-mcp#v1.0.0"]
 ```
 
 Or with a fixed port:
 
 ```toml
 [mcp_servers.backgroundProcess]
-command = "npx"
-args = ["@waylaidwanderer/background-process-mcp@latest", "--listen-port", "31337"]
+command = "pnpm"
+args = ["dlx", "github:angelinx-h/background-process-mcp#v1.0.0", "--listen-port", "31337"]
 ```
 
 For more information, see the [Codex MCP documentation](https://github.com/openai/codex/blob/main/codex-rs/config.md#mcp_servers).
@@ -107,9 +109,9 @@ For more information, see the [Codex MCP documentation](https://github.com/opena
 
 #### Or install manually:
 
-Go to `Cursor Settings` -> `MCP` -> `Add new MCP Server`. Name it `backgroundProcess`, use `command` type with the command `npx @waylaidwanderer/background-process-mcp@latest`.
+Go to `Cursor Settings` -> `MCP` -> `Add new MCP Server`. Name it `backgroundProcess`, use `command` type with the command `pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0`.
 
-Or with a fixed port, use: `npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337`
+Or with a fixed port, use: `pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0 --listen-port 31337`
 
 </details>
 
@@ -129,9 +131,9 @@ Follow the MCP install [guide](https://github.com/google-gemini/gemini-cli/blob/
 
 #### Or install manually:
 
-Go to `Advanced settings` -> `Extensions` -> `Add custom extension`. Name it `backgroundProcess`, use type `STDIO`, and set the `command` to `npx @waylaidwanderer/background-process-mcp@latest`. Click "Add Extension".
+Go to `Advanced settings` -> `Extensions` -> `Add custom extension`. Name it `backgroundProcess`, use type `STDIO`, and set the `command` to `pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0`. Click "Add Extension".
 
-Or with a fixed port, use: `npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337`
+Or with a fixed port, use: `pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0 --listen-port 31337`
 </details>
 
 <details>
@@ -158,8 +160,9 @@ Follow the MCP Servers [documentation](https://opencode.ai/docs/mcp-servers/). F
     "backgroundProcess": {
       "type": "local",
       "command": [
-        "npx",
-        "@waylaidwanderer/background-process-mcp@latest"
+        "pnpm",
+        "dlx",
+        "github:angelinx-h/background-process-mcp#v1.0.0"
       ],
       "enabled": true
     }
@@ -176,8 +179,9 @@ Or with a fixed port:
     "backgroundProcess": {
       "type": "local",
       "command": [
-        "npx",
-        "@waylaidwanderer/background-process-mcp@latest",
+        "pnpm",
+        "dlx",
+        "github:angelinx-h/background-process-mcp#v1.0.0",
         "--listen-port",
         "31337"
       ],
@@ -209,14 +213,14 @@ Follow the MCP install [guide](https://code.visualstudio.com/docs/copilot/chat/m
 
 ```bash
 # For VS Code
-code --add-mcp '{"name":"backgroundProcess","command":"npx","args":["@waylaidwanderer/background-process-mcp@latest"]}'
+code --add-mcp '{"name":"backgroundProcess","command":"pnpm","args":["dlx","github:angelinx-h/background-process-mcp#v1.0.0"]}'
 ```
 
 Or with a fixed port:
 
 ```bash
 # For VS Code
-code --add-mcp '{"name":"backgroundProcess","command":"npx","args":["@waylaidwanderer/background-process-mcp@latest","--listen-port","31337"]}'
+code --add-mcp '{"name":"backgroundProcess","command":"pnpm","args":["dlx","github:angelinx-h/background-process-mcp#v1.0.0","--listen-port","31337"]}'
 ```
 </details>
 
@@ -299,11 +303,11 @@ This will give you access to the `bgpm` command.
 Start the background service manually:
 
 ```bash
-# With npx
-npx @waylaidwanderer/background-process-mcp server
+# With pnpm dlx
+pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0 server
 
 # Listen on a specific port
-npx @waylaidwanderer/background-process-mcp server --listen-port 31337
+pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0 server --listen-port 31337
 
 # Or, if installed globally
 bgpm server
@@ -319,9 +323,27 @@ The server will listen on an available port (defaulting to `31337`) and output a
 Connect the TUI to a running server via its port:
 
 ```bash
-# With npx
-npx @waylaidwanderer/background-process-mcp ui --port <port_number>
+# With pnpm dlx
+pnpm dlx github:angelinx-h/background-process-mcp#v1.0.0 ui --port <port_number>
 
 # Or, if installed globally
 bgpm ui --port <port_number>
+```
+
+## Alternative Installation
+
+Alternatively, you can use `npx` instead of `pnpm dlx` with the npm package:
+
+```bash
+# Standard MCP config
+npx @waylaidwanderer/background-process-mcp@latest
+
+# With fixed port
+npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337
+
+# Run the Core Service
+npx @waylaidwanderer/background-process-mcp server
+
+# Use the TUI
+npx @waylaidwanderer/background-process-mcp ui --port <port_number>
 ```
