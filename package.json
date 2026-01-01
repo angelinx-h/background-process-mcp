@@ -9,10 +9,13 @@
   },
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "src",
+    "tsconfig.json"
   ],
   "scripts": {
     "test": "vitest",
+    "prepare": "tsc || true",
     "build": "tsc",
     "start:server": "node dist/server.js",
     "start:ui": "node dist/cli.js ui --port 31337",
