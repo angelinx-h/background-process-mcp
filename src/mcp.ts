@@ -112,6 +112,45 @@ class CoreServiceClient {
 async function getOrCreateClient(): Promise<CoreServiceClient> {
     const args = minimist(process.argv.slice(2));
 
+    if (args['listen-port']) {
+        const serverProcess = spawn(process.execPath, [
+            cliPath,
+            'server',
+            '--listen-port',
+            args['listen-port'].toString(),
+        ], {
+            stdio: ['ignore', 'pipe', 'pipe'],
+        });
+
+        const portPromise = new Promise<number>((resolve, reject) => {
+            serverProcess.stdout.once('data', (data) => {
+                try {
+                    const handshake = JSON.parse(data.toString()) as {
+                        status: string;
+                        port: number;
+                    };
+                    if (handshake.status === 'listening') {
+                        resolve(handshake.port);
+                    } else {
+                        reject(new Error('Server sent unexpected handshake.'));
+                    }
+                } catch {
+                    reject(new Error('Failed to parse server handshake.'));
+                }
+            });
+            serverProcess.stderr.on('data', (data) => {
+                // Forward server errors to our own stderr
+                // eslint-disable-next-line no-console
+                console.error(data.toString().trim());
+            });
+            setTimeout(() => reject(new Error('Server launch timed out.')), 5000);
+        });
+
+        const port = await portPromise;
+        const url = `ws://localhost:${port}`;
+        return new CoreServiceClient(url, serverProcess);
+    }
+
     if (args.port) {
         const url = `ws://localhost:${args.port}`;
         return new CoreServiceClient(url);

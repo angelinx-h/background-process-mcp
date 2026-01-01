@@ -31,7 +31,7 @@ This configuration works for most MCP clients:
 }
 ```
 
-To connect to a standalone server, add the `--port` argument to the `args` array (e.g., `...mcp@latest", "--port", "31337"]`).
+To connect to a standalone server, add the `--port` argument to the `args` array (e.g., `...mcp@latest", "--port", "31337"]`). To force the MCP server to spawn the core service on a specific port (so the TUI can connect), use `--listen-port` instead (e.g., `...mcp@latest", "--listen-port", "31337"]`).
 
 <details>
 <summary>Claude Code</summary>
@@ -238,8 +238,14 @@ Start the background service manually:
 # With npx
 npx @waylaidwanderer/background-process-mcp server
 
+# Listen on a specific port
+npx @waylaidwanderer/background-process-mcp server --listen-port 31337
+
 # Or, if installed globally
 bgpm server
+
+# Listen on a specific port
+bgpm server --listen-port 31337
 ```
 
 The server will listen on an available port (defaulting to `31337`) and output a JSON handshake with the connection details.

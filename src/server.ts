@@ -1,3 +1,4 @@
+import minimist from 'minimist';
 import portfinder from 'portfinder';
 
 import WebSocketServer from './core/WebSocketServer.js';
@@ -6,7 +7,16 @@ const DEFAULT_PORT = 31337;
 
 async function main(): Promise<void> {
     try {
-        const port = await portfinder.getPortPromise({
+        const args = minimist(process.argv.slice(2));
+        const listenPortArg = args['listen-port'];
+        const listenPort = typeof listenPortArg === 'string'
+            ? Number.parseInt(listenPortArg, 10)
+            : listenPortArg;
+        if (listenPortArg !== undefined && !Number.isFinite(listenPort)) {
+            throw new Error('Invalid --listen-port value.');
+        }
+
+        const port = listenPort ?? await portfinder.getPortPromise({
             port: DEFAULT_PORT,
         });
 
