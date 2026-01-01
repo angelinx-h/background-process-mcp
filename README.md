@@ -33,6 +33,25 @@ This configuration works for most MCP clients:
 
 To connect to a standalone server, add the `--port` argument to the `args` array (e.g., `...mcp@latest", "--port", "31337"]`). To force the MCP server to spawn the core service on a specific port (so the TUI can connect), use `--listen-port` instead (e.g., `...mcp@latest", "--listen-port", "31337"]`).
 
+**With fixed port (optional)**
+
+To use a fixed port 31337, add the `--listen-port` argument:
+
+```json
+{
+  "mcpServers": {
+    "backgroundProcess": {
+      "command": "npx",
+      "args": [
+        "@waylaidwanderer/background-process-mcp@latest",
+        "--listen-port",
+        "31337"
+      ]
+    }
+  }
+}
+```
+
 <details>
 <summary>Claude Code</summary>
 
@@ -40,6 +59,12 @@ Use the Claude Code CLI to add the Background Process MCP server:
 
 ```bash
 claude mcp add backgroundProcess npx @waylaidwanderer/background-process-mcp@latest
+```
+
+Or with a fixed port:
+
+```bash
+claude mcp add backgroundProcess npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337
 ```
 </details>
 
@@ -61,6 +86,14 @@ command = "npx"
 args = ["@waylaidwanderer/background-process-mcp@latest"]
 ```
 
+Or with a fixed port:
+
+```toml
+[mcp_servers.backgroundProcess]
+command = "npx"
+args = ["@waylaidwanderer/background-process-mcp@latest", "--listen-port", "31337"]
+```
+
 For more information, see the [Codex MCP documentation](https://github.com/openai/codex/blob/main/codex-rs/config.md#mcp_servers).
 
 </details>
@@ -75,6 +108,8 @@ For more information, see the [Codex MCP documentation](https://github.com/opena
 #### Or install manually:
 
 Go to `Cursor Settings` -> `MCP` -> `Add new MCP Server`. Name it `backgroundProcess`, use `command` type with the command `npx @waylaidwanderer/background-process-mcp@latest`.
+
+Or with a fixed port, use: `npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337`
 
 </details>
 
@@ -95,6 +130,8 @@ Follow the MCP install [guide](https://github.com/google-gemini/gemini-cli/blob/
 #### Or install manually:
 
 Go to `Advanced settings` -> `Extensions` -> `Add custom extension`. Name it `backgroundProcess`, use type `STDIO`, and set the `command` to `npx @waylaidwanderer/background-process-mcp@latest`. Click "Add Extension".
+
+Or with a fixed port, use: `npx @waylaidwanderer/background-process-mcp@latest --listen-port 31337`
 </details>
 
 <details>
@@ -129,6 +166,26 @@ Follow the MCP Servers [documentation](https://opencode.ai/docs/mcp-servers/). F
   }
 }
 ```
+
+Or with a fixed port:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "backgroundProcess": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@waylaidwanderer/background-process-mcp@latest",
+        "--listen-port",
+        "31337"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
 </details>
 
 <details>
@@ -153,6 +210,13 @@ Follow the MCP install [guide](https://code.visualstudio.com/docs/copilot/chat/m
 ```bash
 # For VS Code
 code --add-mcp '{"name":"backgroundProcess","command":"npx","args":["@waylaidwanderer/background-process-mcp@latest"]}'
+```
+
+Or with a fixed port:
+
+```bash
+# For VS Code
+code --add-mcp '{"name":"backgroundProcess","command":"npx","args":["@waylaidwanderer/background-process-mcp@latest","--listen-port","31337"]}'
 ```
 </details>
 
